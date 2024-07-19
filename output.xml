@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.0.1 (Python 3.12.3 on win32)" generated="2024-07-19T00:20:58.711483" rpa="false" schemaversion="5">
+<suite id="s1" name="Testeget" source="C:\Users\william.dasilva\Downloads\testes\tutorial\testeget.robot">
+<test id="s1-t1" name="Create Order" line="9">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2024-07-19T00:20:59.038592" level="INFO">Creating Session using : alias=petstore, url=https://petstore.swagger.io/v2, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>petstore</arg>
+<arg>${BASE_URL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2024-07-19T00:20:59.038377" elapsed="0.000215"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2024-07-19T00:20:59.039379" level="INFO">${order_data} = {'id': '0', 'petId': '0', 'quantity': '1', 'shipDate': '2024-07-19T15:23:00.000Z', 'status': 'placed', 'complete': 'false'}</msg>
+<var>${order_data}</var>
+<arg>id=0</arg>
+<arg>petId=0</arg>
+<arg>quantity=1</arg>
+<arg>shipDate=2024-07-19T15:23:00.000Z</arg>
+<arg>status=placed</arg>
+<arg>complete=false</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2024-07-19T00:20:59.038592" elapsed="0.000787"/>
+</kw>
+<kw name="POST" owner="RequestsLibrary">
+<msg time="2024-07-19T00:20:59.711620" level="INFO">POST Request : url=https://petstore.swagger.io/v2/store/order 
+ path_url=/v2/store/order 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '123', 'Content-Type': 'application/json'} 
+ body=b'{"id": "0", "petId": "0", "quantity": "1", "shipDate": "2024-07-19T15:23:00.000Z", "status": "placed", "complete": "false"}' 
+ </msg>
+<msg time="2024-07-19T00:20:59.711620" level="INFO">POST Response : url=https://petstore.swagger.io/v2/store/order 
+ status=200, reason=OK 
+ headers={'Date': 'Fri, 19 Jul 2024 03:20:44 GMT', 'Content-Type': 'application/json', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, POST, DELETE, PUT', 'Access-Control-Allow-Headers': 'Content-Type, api_key, Authorization', 'Server': 'Jetty(9.2.9.v20150224)'} 
+ body={"id":23220,"petId":0,"quantity":1,"shipDate":"2024-07-19T15:23:00.000+0000","status":"placed","complete":false} 
+ </msg>
+<msg time="2024-07-19T00:20:59.711620" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>https://petstore.swagger.io/v2/store/order</arg>
+<arg>json=${order_data}</arg>
+<doc>Sends a POST request.</doc>
+<status status="PASS" start="2024-07-19T00:20:59.039684" elapsed="0.671936"/>
+</kw>
+<kw name="Should Be Equal As Numbers" owner="BuiltIn">
+<msg time="2024-07-19T00:20:59.713535" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to real numbers.</doc>
+<status status="PASS" start="2024-07-19T00:20:59.712536" elapsed="0.000999"/>
+</kw>
+<kw name="Convert To Dictionary" owner="Collections">
+<msg time="2024-07-19T00:20:59.714953" level="INFO">${order} = {'id': 23220, 'petId': 0, 'quantity': 1, 'shipDate': '2024-07-19T15:23:00.000+0000', 'status': 'placed', 'complete': False}</msg>
+<var>${order}</var>
+<arg>${response.json()}</arg>
+<doc>Converts the given ``item`` to a Python ``dict`` type.</doc>
+<status status="PASS" start="2024-07-19T00:20:59.714953" elapsed="0.001003"/>
+</kw>
+<kw name="Should Contain" owner="BuiltIn">
+<arg>${order}</arg>
+<arg>id</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" start="2024-07-19T00:20:59.715956" elapsed="0.001001"/>
+</kw>
+<kw name="Should Contain" owner="BuiltIn">
+<arg>${order}</arg>
+<arg>petId</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" start="2024-07-19T00:20:59.716957" elapsed="0.000000"/>
+</kw>
+<kw name="Should Contain" owner="BuiltIn">
+<arg>${order}</arg>
+<arg>quantity</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" start="2024-07-19T00:20:59.718088" elapsed="0.000000"/>
+</kw>
+<kw name="Should Contain" owner="BuiltIn">
+<arg>${order}</arg>
+<arg>shipDate</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" start="2024-07-19T00:20:59.719367" elapsed="0.000000"/>
+</kw>
+<kw name="Should Contain" owner="BuiltIn">
+<arg>${order}</arg>
+<arg>status</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" start="2024-07-19T00:20:59.720930" elapsed="0.000000"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${order['status']}</arg>
+<arg>placed</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2024-07-19T00:20:59.721912" elapsed="0.000000"/>
+</kw>
+<doc>Verifica se a API permite criar uma nova ordem de pedido</doc>
+<status status="PASS" start="2024-07-19T00:20:59.037378" elapsed="0.686018"/>
+</test>
+<test id="s1-t2" name="Get Order By Valid OrderId" line="23">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2024-07-19T00:20:59.725888" level="INFO">Creating Session using : alias=petstore, url=https://petstore.swagger.io/v2, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>petstore</arg>
+<arg>${BASE_URL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2024-07-19T00:20:59.725888" elapsed="0.000000"/>
+</kw>
+<kw name="GET" owner="RequestsLibrary">
+<msg time="2024-07-19T00:21:00.380546" level="INFO">GET Request : url=https://petstore.swagger.io/v2/store/order/1 
+ path_url=/v2/store/order/1 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2024-07-19T00:21:00.381450" level="INFO">GET Response : url=https://petstore.swagger.io/v2/store/order/1 
+ status=200, reason=OK 
+ headers={'Date': 'Fri, 19 Jul 2024 03:20:45 GMT', 'Content-Type': 'application/json', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, POST, DELETE, PUT', 'Access-Control-Allow-Headers': 'Content-Type, api_key, Authorization', 'Server': 'Jetty(9.2.9.v20150224)'} 
+ body={"id":1,"petId":0,"quantity":0,"shipDate":"2024-07-19T03:14:48.698+0000","status":"placed","complete":true} 
+ </msg>
+<msg time="2024-07-19T00:21:00.381450" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>https://petstore.swagger.io/v2/store/order/1</arg>
+<doc>Sends a GET request.</doc>
+<status status="PASS" start="2024-07-19T00:20:59.726887" elapsed="0.654563"/>
+</kw>
+<kw name="Should Be Equal As Numbers" owner="BuiltIn">
+<msg time="2024-07-19T00:21:00.382503" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to real numbers.</doc>
+<status status="PASS" start="2024-07-19T00:21:00.382004" elapsed="0.000499"/>
+</kw>
+<kw name="Convert To Dictionary" owner="Collections">
+<msg time="2024-07-19T00:21:00.383508" level="INFO">${order} = {'id': 1, 'petId': 0, 'quantity': 0, 'shipDate': '2024-07-19T03:14:48.698+0000', 'status': 'placed', 'complete': True}</msg>
+<var>${order}</var>
+<arg>${response.json()}</arg>
+<doc>Converts the given ``item`` to a Python ``dict`` type.</doc>
+<status status="PASS" start="2024-07-19T00:21:00.382503" elapsed="0.001005"/>
+</kw>
+<kw name="Should Contain" owner="BuiltIn">
+<arg>${order}</arg>
+<arg>id</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" start="2024-07-19T00:21:00.383508" elapsed="0.000999"/>
+</kw>
+<kw name="Should Contain" owner="BuiltIn">
+<arg>${order}</arg>
+<arg>petId</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" start="2024-07-19T00:21:00.384507" elapsed="0.000000"/>
+</kw>
+<kw name="Should Contain" owner="BuiltIn">
+<arg>${order}</arg>
+<arg>quantity</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" start="2024-07-19T00:21:00.384507" elapsed="0.001002"/>
+</kw>
+<kw name="Should Contain" owner="BuiltIn">
+<arg>${order}</arg>
+<arg>status</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" start="2024-07-19T00:21:00.385509" elapsed="0.000000"/>
+</kw>
+<doc>Verifica se a API retorna os detalhes do pedido corretamente para um OrderId válido</doc>
+<status status="PASS" start="2024-07-19T00:20:59.724883" elapsed="0.660626"/>
+</test>
+<test id="s1-t3" name="Get Order By Invalid OrderId" line="34">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2024-07-19T00:21:00.386508" level="INFO">Creating Session using : alias=petstore, url=https://petstore.swagger.io/v2, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>petstore</arg>
+<arg>${BASE_URL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2024-07-19T00:21:00.386508" elapsed="0.000000"/>
+</kw>
+<kw name="GET" owner="RequestsLibrary">
+<msg time="2024-07-19T00:21:01.040804" level="INFO">GET Request : url=https://petstore.swagger.io/v2/store/order/999999 
+ path_url=/v2/store/order/999999 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2024-07-19T00:21:01.040804" level="INFO">GET Response : url=https://petstore.swagger.io/v2/store/order/999999 
+ status=404, reason=Not Found 
+ headers={'Date': 'Fri, 19 Jul 2024 03:20:46 GMT', 'Content-Type': 'application/json', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, POST, DELETE, PUT', 'Access-Control-Allow-Headers': 'Content-Type, api_key, Authorization', 'Server': 'Jetty(9.2.9.v20150224)'} 
+ body={"code":1,"type":"error","message":"Order not found"} 
+ </msg>
+<msg time="2024-07-19T00:21:01.040804" level="FAIL">HTTPError: 404 Client Error: Not Found for url: https://petstore.swagger.io/v2/store/order/999999</msg>
+<var>${response}</var>
+<arg>https://petstore.swagger.io/v2/store/order/999999</arg>
+<doc>Sends a GET request.</doc>
+<status status="FAIL" start="2024-07-19T00:21:00.387508" elapsed="0.656293">HTTPError: 404 Client Error: Not Found for url: https://petstore.swagger.io/v2/store/order/999999</status>
+</kw>
+<kw name="Should Be Equal As Numbers" owner="BuiltIn">
+<arg>${response.status_code}</arg>
+<arg>404</arg>
+<doc>Fails if objects are unequal after converting them to real numbers.</doc>
+<status status="NOT RUN" start="2024-07-19T00:21:01.044801" elapsed="0.000000"/>
+</kw>
+<kw name="Convert To Dictionary" owner="Collections">
+<var>${error}</var>
+<arg>${response.json()}</arg>
+<doc>Converts the given ``item`` to a Python ``dict`` type.</doc>
+<status status="NOT RUN" start="2024-07-19T00:21:01.045801" elapsed="0.000000"/>
+</kw>
+<kw name="Should Contain" owner="BuiltIn">
+<arg>${error}</arg>
+<arg>message</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="NOT RUN" start="2024-07-19T00:21:01.045801" elapsed="0.000000"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${error['message']}</arg>
+<arg>Order not found</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="NOT RUN" start="2024-07-19T00:21:01.046802" elapsed="0.000000"/>
+</kw>
+<doc>Verifica se a API retorna um erro apropriado para um OrderId inválido</doc>
+<status status="FAIL" start="2024-07-19T00:21:00.386508" elapsed="0.661314">HTTPError: 404 Client Error: Not Found for url: https://petstore.swagger.io/v2/store/order/999999</status>
+</test>
+<status status="FAIL" start="2024-07-19T00:20:58.713480" elapsed="2.336498"/>
+</suite>
+<statistics>
+<total>
+<stat pass="2" fail="1" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="2" fail="1" skip="0" id="s1" name="Testeget">Testeget</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
