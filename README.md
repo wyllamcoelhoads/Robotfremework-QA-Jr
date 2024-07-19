@@ -20,7 +20,7 @@ Para realizar o teste de forma automatica siga os passos;
    ![downloads](/imagens/downloads.png)
 
 6. Extraia o arquivo no local do Downloads, em seguida abra o terminal e vá até o diretorio conforme imagem;
-   ![caminho](/imagem/caminho1.png) 
+   ![caminho](/imagem/caminho%1.png) 
   
 
 
